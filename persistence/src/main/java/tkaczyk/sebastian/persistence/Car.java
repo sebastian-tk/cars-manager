@@ -1,15 +1,16 @@
 package tkaczyk.sebastian.persistence;
 
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.math.BigDecimal;
 
+@Builder
 @EqualsAndHashCode
 public class Car {
-    private String model;
-    private BigDecimal price;
-    private int mileage;
-    private Engine engine;
-    private CarBody carBody;
-    private Wheel wheel;
+    String model;
+    BigDecimal price;
+    int mileage;
+    Engine engine;
+    CarBody carBody;
+    Wheel wheel;
 }

@@ -11,6 +11,6 @@ import tkaczyk.sebastian.persistence.type.EngineType;
 @Builder
 @EqualsAndHashCode
 public class Engine {
-    private EngineType type;
-    private double power;
+    EngineType type;
+    double power;
 }

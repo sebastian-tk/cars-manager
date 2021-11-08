@@ -11,7 +11,7 @@ import tkaczyk.sebastian.persistence.type.TyreType;
 @EqualsAndHashCode
 @Builder
 public class Wheel {
-    private TyreType type;
-    private String model;
-    private int size;
+    TyreType type;
+    String model;
+    int size;
 }

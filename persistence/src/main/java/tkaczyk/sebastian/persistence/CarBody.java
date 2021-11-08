@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 public class CarBody {
-    private CarBodyColor color;
-    private CarBodyType type;
-    private List<String> components;
+    CarBodyColor color;
+    CarBodyType type;
+    List<String> components;
 }
