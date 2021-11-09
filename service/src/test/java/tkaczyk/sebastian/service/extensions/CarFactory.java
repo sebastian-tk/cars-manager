@@ -23,7 +23,7 @@ public interface CarFactory {
                     .builder()
                     .color(BLACK)
                     .type(COMBI)
-                    .components(List.of("A", "B", "C", "D", "E"))
+                    .components(List.of("A", "B", "C", "D", "E","F","G"))
                     .build())
             .wheel(Wheel
                     .builder()
@@ -122,13 +122,70 @@ public interface CarFactory {
             .carBody(CarBody
                     .builder()
                     .color(BLACK)
-                    .type(SEDAN)
+                    .type(COMBI)
                     .components(List.of("B", "C"))
                     .build())
             .wheel(Wheel
                     .builder()
                     .type(WINTER)
                     .model("PIRELLI")
+                    .size(16)
+                    .build())
+            .build();
+    Car honda = Car
+            .builder()
+            .model("HONDA")
+            .price(new BigDecimal("130000"))
+            .mileage(1000)
+            .engine(Engine.builder().type(GASOLINE).power(2.4).build())
+            .carBody(CarBody
+                    .builder()
+                    .color(BLACK)
+                    .type(HATCHBACK)
+                    .components(List.of("B", "C","E"))
+                    .build())
+            .wheel(Wheel
+                    .builder()
+                    .type(WINTER)
+                    .model("YOKOHAMA")
+                    .size(15)
+                    .build())
+            .build();
+    Car ford = Car
+            .builder()
+            .model("FORD")
+            .price(new BigDecimal("98000"))
+            .mileage(700)
+            .engine(Engine.builder().type(DIESEL).power(3.0).build())
+            .carBody(CarBody
+                    .builder()
+                    .color(SILVER)
+                    .type(HATCHBACK)
+                    .components(List.of("A","B", "C","E","F","G"))
+                    .build())
+            .wheel(Wheel
+                    .builder()
+                    .type(WINTER)
+                    .model("NOKIAN")
+                    .size(17)
+                    .build())
+            .build();
+    Car renault = Car
+            .builder()
+            .model("RENAULT")
+            .price(new BigDecimal("85000"))
+            .mileage(200)
+            .engine(Engine.builder().type(GASOLINE).power(1.8).build())
+            .carBody(CarBody
+                    .builder()
+                    .color(BLUE)
+                    .type(HATCHBACK)
+                    .components(List.of("A","B", "C","D","E"))
+                    .build())
+            .wheel(Wheel
+                    .builder()
+                    .type(WINTER)
+                    .model("NOKIAN")
                     .size(16)
                     .build())
             .build();
