@@ -18,6 +18,6 @@ public class CarServiceExtension implements ParameterResolver {
 
     @Override
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        return new CarsService(Set.of(bmw,fiat,opel,mazda,mercedes,toyota));
+        return new CarsService(Set.of(bmw,fiat,opel,mazda,mercedes,toyota,renault,ford,honda));
     }
 }

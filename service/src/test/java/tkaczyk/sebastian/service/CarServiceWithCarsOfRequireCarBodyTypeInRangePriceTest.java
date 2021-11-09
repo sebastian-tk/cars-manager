@@ -95,7 +95,7 @@ public class CarServiceWithCarsOfRequireCarBodyTypeInRangePriceTest {
                 .filter(car -> car.isCarBodyTypeEqual(carBodyType))
                 .filter(car-> car.isPriceInRange(minPriceTest,maxPriceTest))
                 .toList())
-                .containsAll(expectedCars.get(carBodyType));
+                .containsExactlyInAnyOrderElementsOf(expectedCars.get(carBodyType));
     }
 
     @ParameterizedTest
@@ -104,7 +104,7 @@ public class CarServiceWithCarsOfRequireCarBodyTypeInRangePriceTest {
             "0,50000,70000",
             "1,75000,90000",
             "2,92000,100000",
-            "3,11000,150000"
+            "3,110000,150000"
     })
     public void test8(int idx,int minPrice,int maxPrice){
         CarBodyType carBodyType = HATCHBACK;
@@ -119,6 +119,6 @@ public class CarServiceWithCarsOfRequireCarBodyTypeInRangePriceTest {
                 .filter(car -> car.isCarBodyTypeEqual(carBodyType))
                 .filter(car-> car.isPriceInRange(new BigDecimal(minPrice),new BigDecimal(maxPrice)))
                 .toList())
-                .containsAll(expectedCars.get(idx));
+                .containsExactlyInAnyOrderElementsOf( expectedCars.get(idx));
     }
 }

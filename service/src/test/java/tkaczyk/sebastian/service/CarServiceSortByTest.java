@@ -46,7 +46,7 @@ public class CarServiceSortByTest {
                         .stream()
                         .map(CarUtils.toModel)
                         .toList()
-        ).containsAnyElementsOf(expectedCars.get(sortBy));
+        ).containsExactlyElementsOf(expectedCars.get(sortBy));
     }
 
     @ParameterizedTest
@@ -63,6 +63,6 @@ public class CarServiceSortByTest {
                 .stream()
                 .map(CarUtils.toModel)
                 .toList()
-        ).containsAnyElementsOf(expectedCars.get(sortBy));
+        ).containsExactlyElementsOf(expectedCars.get(sortBy));
     }
 }
