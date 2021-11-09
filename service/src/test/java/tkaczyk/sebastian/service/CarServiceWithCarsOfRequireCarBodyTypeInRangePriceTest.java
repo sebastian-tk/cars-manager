@@ -22,7 +22,7 @@ import static tkaczyk.sebastian.service.extensions.CarFactory.*;
 
 @ExtendWith(CarServiceExtension.class)
 @RequiredArgsConstructor
-public class CarServiceWithCarsOfRequireCarBodyTypeInRangePrice {
+public class CarServiceWithCarsOfRequireCarBodyTypeInRangePriceTest {
     private final CarsService carsService;
 
     private static final BigDecimal correctMinPrice = new BigDecimal("1.0");
