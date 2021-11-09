@@ -85,7 +85,7 @@ public class CarServiceWithCarsOfRequireCarBodyTypeInRangePriceTest {
         BigDecimal maxPriceTest = BigDecimal.valueOf(150000);
 
         var expectedCars = Map.of(
-                HATCHBACK, List.of(fiat,mazda),
+                HATCHBACK, List.of(fiat,mazda,ford,honda,renault),
                 COMBI,List.of(bmw,toyota),
                 SEDAN,List.of(opel,mercedes)
                 );
@@ -110,9 +110,9 @@ public class CarServiceWithCarsOfRequireCarBodyTypeInRangePriceTest {
         CarBodyType carBodyType = HATCHBACK;
         List<List<Car>> expectedCars =  List.of(
                 List.of(fiat),
-                List.of(mazda),
-                List.of(),
-                List.of()
+                List.of(mazda,renault),
+                List.of(ford),
+                List.of(honda)
             );
         assertThat(carsService.withCarsOfRequireCarBodyTypeInRangePrice(carBodyType,new BigDecimal(minPrice),new BigDecimal(maxPrice))
                 .stream()
