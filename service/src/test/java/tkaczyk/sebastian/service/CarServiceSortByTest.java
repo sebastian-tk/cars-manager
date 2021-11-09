@@ -1,13 +1,11 @@
 package tkaczyk.sebastian.service;
 
 import lombok.RequiredArgsConstructor;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import tkaczyk.sebastian.persistence.Car;
 import tkaczyk.sebastian.persistence.CarUtils;
 import tkaczyk.sebastian.service.exception.CarServiceException;
 import tkaczyk.sebastian.service.extensions.CarServiceExtension;
@@ -37,16 +35,16 @@ public class CarServiceSortByTest {
     @EnumSource(SortBy.class)
     public void test2(SortBy sortBy){
         var expectedCars = Map.of(
-                SortBy.AMOUNT_COMPONENTS, List.of("FIAT","TOYOTA","MAZDA","OPEL","BMW","MERCEDES"),
-                SortBy.POWER_ENGINE, List.of("OPEL","FIAT","MAZDA","TOYOTA","MERCEDES","BMW"),
-                SortBy.SIZE_WHEEL, List.of("FIAT","OPEL","TOYOTA","MERCEDES","BMW","MAZDA")
+                SortBy.AMOUNT_COMPONENTS, List.of("FIAT","TOYOTA","HONDA","MAZDA","OPEL","RENAULT","FORD","MERCEDES","BMW"),
+                SortBy.POWER_ENGINE, List.of("OPEL","FIAT","RENAULT","MAZDA","TOYOTA","HONDA","MERCEDES","FORD","BMW"),
+                SortBy.SIZE_WHEEL, List.of("FIAT","HONDA","OPEL","RENAULT","TOYOTA","FORD","MERCEDES","BMW","MAZDA")
         );
         assertThat(carsService
                         .sortBy(sortBy, false)
                         .stream()
                         .map(CarUtils.toModel)
                         .toList()
-        ).containsExactlyElementsOf(expectedCars.get(sortBy));
+        ).containsExactlyInAnyOrderElementsOf(expectedCars.get(sortBy));
     }
 
     @ParameterizedTest
@@ -54,15 +52,15 @@ public class CarServiceSortByTest {
     @EnumSource(SortBy.class)
     public void test3(SortBy sortBy){
         var expectedCars = Map.of(
-                SortBy.AMOUNT_COMPONENTS,List.of("MERCEDES","BMW","OPEL","MAZDA","TOYOTA","FIAT"),
-                SortBy.POWER_ENGINE, List.of("BMW","MERCEDES","TOYOTA","MAZDA","FIAT","OPEL"),
-                SortBy.SIZE_WHEEL, List.of("MAZDA","BMW","MERCEDES","TOYOTA","OPEL","FIAT")
+                SortBy.AMOUNT_COMPONENTS,List.of("BMW", "MERCEDES", "FORD", "RENAULT", "OPEL", "MAZDA", "HONDA", "TOYOTA", "FIAT"),
+                SortBy.POWER_ENGINE, List.of("BMW", "FORD", "MERCEDES", "HONDA", "TOYOTA", "MAZDA", "RENAULT", "FIAT", "OPEL"),
+                SortBy.SIZE_WHEEL, List.of("MAZDA", "BMW", "MERCEDES", "FORD", "TOYOTA", "RENAULT", "OPEL", "HONDA", "FIAT")
         );
         assertThat(carsService
                 .sortBy(sortBy, true)
                 .stream()
                 .map(CarUtils.toModel)
                 .toList()
-        ).containsExactlyElementsOf(expectedCars.get(sortBy));
+        ).containsExactlyInAnyOrderElementsOf(expectedCars.get(sortBy));
     }
 }

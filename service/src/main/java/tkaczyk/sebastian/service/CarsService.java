@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
+import static tkaczyk.sebastian.persistence.CarUtils.*;
+
 @RequiredArgsConstructor
 
 public class CarsService {
@@ -27,9 +29,12 @@ public class CarsService {
             throw new CarServiceException("Argument sortBy is null");
         }
         return  switch (sortBy){
-            case SIZE_WHEEL -> cars.stream().sorted(CarUtils.sortBySizeWheel).toList();
-            case POWER_ENGINE -> cars.stream().sorted(CarUtils.sortByPowerEngine).toList();
-            case AMOUNT_COMPONENTS -> cars.stream().sorted(CarUtils.sortByAmountComponents).toList();
+            case SIZE_WHEEL -> descending ? cars.stream().sorted(sortBySizeWheel.reversed()).sorted(sortByModel).toList():
+                                            cars.stream().sorted(sortBySizeWheel).sorted(sortByModel).toList();
+            case POWER_ENGINE -> descending ?   cars.stream().sorted(sortByPowerEngine.reversed()).sorted(sortByModel).toList():
+                                                cars.stream().sorted(sortByPowerEngine).sorted(sortByModel).toList();
+            case AMOUNT_COMPONENTS -> descending ?  cars.stream().sorted(sortByAmountComponents.reversed()).sorted(sortByModel).toList():
+                                                    cars.stream().sorted(sortByAmountComponents).sorted(sortByModel).toList();
         };
     }
 
