@@ -3,6 +3,7 @@ package tkaczyk.sebastian.persistence;
 import tkaczyk.sebastian.persistence.type.EngineType;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
@@ -15,4 +16,5 @@ public interface CarUtils {
     Comparator<Car> sortByModel = Comparator.comparing(car -> car.model);
 
     BiPredicate<Car, EngineType> carWithEngineType = (car,type) -> car.engine.type.equals(type);
+    BiPredicate<Car, List<String>> carWithComponents = (car, components) -> car.carBody.components.containsAll(components);
 }

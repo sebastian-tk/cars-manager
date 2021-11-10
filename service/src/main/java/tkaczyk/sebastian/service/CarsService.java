@@ -82,6 +82,22 @@ public class CarsService {
                 .sorted(sortByModel)
                 .toList();
     }
+
+    /**
+     *
+     * @param components reference to List<String>
+     * @return  List with  cars which contain components. Cars are sorted by name
+     */
+    public List<Car> findCarsWithComponents(List<String> components){
+        if(components == null || components.isEmpty()){
+            throw new CarServiceException("Invalid component list argument");
+        }
+        return cars
+                .stream()
+                .filter(car -> carWithComponents.test(car,components))
+                .sorted(sortByModel)
+                .toList();
+    }
 }
 
 
