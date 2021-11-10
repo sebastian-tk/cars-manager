@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import tkaczyk.sebastian.persistence.Car;
 import tkaczyk.sebastian.persistence.CarUtils;
 import tkaczyk.sebastian.persistence.type.CarBodyType;
+import tkaczyk.sebastian.persistence.type.EngineType;
 import tkaczyk.sebastian.service.exception.CarServiceException;
 import tkaczyk.sebastian.service.type.SortBy;
 
@@ -65,4 +66,33 @@ public class CarsService {
                     .filter(car-> car.isPriceInRange(minPrice,maxPrice))
                     .toList();
     }
+
+    /**
+     *
+     * @param engineType object EngineType
+     * @return  sorted Cars by name only with engineType equals with argument of method engineType
+     */
+    public List<Car> withSortedCarsByNameWithEngineType (EngineType engineType){
+        if(engineType == null){
+            throw new CarServiceException("Argument engineType is null");
+        }
+        return cars
+                .stream()
+                .filter(car->carWithEngineType.test(car,engineType))
+                .sorted(sortByModel)
+                .toList();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
