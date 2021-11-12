@@ -12,6 +12,12 @@
     <artifactId>persistence</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <finalName>persistence</finalName>

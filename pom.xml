@@ -23,6 +23,7 @@
 
         <lombok.version>1.18.20</lombok.version>
         <gson.versio>2.8.7</gson.versio>
+        <eclipse-collections.version>10.4.0</eclipse-collections.version>
         <junit.platform.launcher.version>1.8.1</junit.platform.launcher.version>
         <junit.jupiter.engine.version>5.8.1</junit.jupiter.engine.version>
         <junit.vintage.engine.version>5.8.1</junit.vintage.engine.version>
@@ -50,6 +51,11 @@
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>${gson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.collections</groupId>
+                <artifactId>eclipse-collections</artifactId>
+                <version>${eclipse-collections.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
