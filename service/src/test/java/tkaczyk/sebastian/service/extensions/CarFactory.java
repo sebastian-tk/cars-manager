@@ -63,7 +63,7 @@ public interface CarFactory {
                     .builder()
                     .color(RED)
                     .type(SEDAN)
-                    .components(List.of("D", "E", "F", "G"))
+                    .components(List.of("D", "E", "F", "H"))
                     .build())
             .wheel(Wheel
                     .builder()
@@ -103,7 +103,7 @@ public interface CarFactory {
                     .builder()
                     .color(WHITE)
                     .type(SEDAN)
-                    .components(List.of("A", "E", "F", "G", "H", "I"))
+                    .components(List.of("A","B", "C","E","F","G"))
                     .build())
             .wheel(Wheel
                     .builder()
@@ -123,7 +123,7 @@ public interface CarFactory {
                     .builder()
                     .color(BLACK)
                     .type(COMBI)
-                    .components(List.of("B", "C"))
+                    .components(List.of("H", "F"))
                     .build())
             .wheel(Wheel
                     .builder()
