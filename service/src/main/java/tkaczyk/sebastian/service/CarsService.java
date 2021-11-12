@@ -5,13 +5,17 @@ import tkaczyk.sebastian.persistence.Car;
 import tkaczyk.sebastian.persistence.CarUtils;
 import tkaczyk.sebastian.persistence.type.CarBodyType;
 import tkaczyk.sebastian.persistence.type.EngineType;
+import tkaczyk.sebastian.persistence.type.TyreType;
 import tkaczyk.sebastian.service.exception.CarServiceException;
 import tkaczyk.sebastian.service.type.SortBy;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.*;
 import static tkaczyk.sebastian.persistence.CarUtils.*;
 
 @RequiredArgsConstructor
@@ -84,6 +88,33 @@ public class CarsService {
     }
 
     /**
+     *         Method group cars by TyreType and sorted by amount of cars in List<Car>
+     * @return Map with TyreType as keys and List with Cars as values. Pairs key-values are sorted by amount cars
+     *          in list descending
+     */
+    public Map<TyreType, List<Car>> groupByTyreType() {
+        return cars
+                .stream()
+                .collect(groupingBy(
+                        toTyreType,
+                        collectingAndThen(
+                                mapping(Function.identity(), toList()),
+                                l -> l.stream()
+                                        .sorted(sortByModel)
+                                        .toList()
+                        )))
+                .entrySet()
+                .stream()
+                .sorted((e1, e2) -> Integer.compare(e2.getValue().size(), e1.getValue().size()))
+                .collect(toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
+    }
+
+    /**
      *
      * @param components reference to List<String>
      * @return  List with  cars which contain components. Cars are sorted by name
@@ -99,11 +130,6 @@ public class CarsService {
                 .toList();
     }
 }
-
-
-
-
-
 
 
 

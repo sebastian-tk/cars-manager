@@ -1,6 +1,7 @@
 package tkaczyk.sebastian.persistence;
 
 import tkaczyk.sebastian.persistence.type.EngineType;
+import tkaczyk.sebastian.persistence.type.TyreType;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.function.Function;
 
 public interface CarUtils {
     Function<Car,String> toModel = car -> car.model;
+    Function<Car, TyreType> toTyreType = car -> car.wheel.type;
 
     Comparator<Car> sortBySizeWheel = Comparator.comparing(car -> car.wheel.size);
     Comparator<Car> sortByPowerEngine = Comparator.comparing(car -> car.engine.power);
