@@ -1,6 +1,7 @@
 package tkaczyk.sebastian.service;
 
 import lombok.RequiredArgsConstructor;
+import org.eclipse.collections.impl.collector.Collectors2;
 import tkaczyk.sebastian.persistence.Car;
 import tkaczyk.sebastian.persistence.CarUtils;
 import tkaczyk.sebastian.persistence.type.CarBodyType;
@@ -8,6 +9,8 @@ import tkaczyk.sebastian.persistence.type.EngineType;
 import tkaczyk.sebastian.persistence.type.TyreType;
 import tkaczyk.sebastian.service.exception.CarServiceException;
 import tkaczyk.sebastian.service.type.SortBy;
+import tkaczyk.sebastian.service.type.Statistics;
+import tkaczyk.sebastian.service.type.StatisticsType;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -19,6 +22,7 @@ import static java.lang.Integer.*;
 import static java.util.function.Function.*;
 import static java.util.stream.Collectors.*;
 import static tkaczyk.sebastian.persistence.CarUtils.*;
+import static tkaczyk.sebastian.service.type.Statistics.*;
 
 @RequiredArgsConstructor
 
@@ -91,6 +95,23 @@ public class CarsService {
 
     /**
      *
+     * @param requireType object StatisticsType
+     * @return a new Statistics object with type equals requireType based on cars
+     */
+    public Statistics<?> getStatistics(StatisticsType requireType){
+        if(requireType == null){
+            throw new CarServiceException("Argument type of StatisticsType is null");
+        }
+
+        return  switch (requireType){
+            case PRICE -> toBigDecimalStatistics(cars.stream().collect(Collectors2.summarizingBigDecimal(toPrice)));
+            case MILEAGE -> toIntStatistics(cars.stream().collect(Collectors.summarizingInt(toMileage2)));
+            case POWER_ENGINE -> toDoubleStatistics(cars.stream().collect(Collectors.summarizingDouble(toPowerEngine)));
+        };
+    }
+
+    /**
+     *
      * @return Map with Cars as key and mileages of cars as values. Map is sorted descending by values
      */
     public Map<Car,Integer> groupByCarWithMileage(){
@@ -154,6 +175,7 @@ public class CarsService {
                 .sorted(sortByModel)
                 .toList();
     }
+
 }
 
 
