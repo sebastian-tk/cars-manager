@@ -15,6 +15,8 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import static java.lang.Integer.*;
+import static java.util.function.Function.*;
 import static java.util.stream.Collectors.*;
 import static tkaczyk.sebastian.persistence.CarUtils.*;
 
@@ -88,6 +90,29 @@ public class CarsService {
     }
 
     /**
+     *
+     * @return Map with Cars as key and mileages of cars as values. Map is sorted descending by values
+     */
+    public Map<Car,Integer> groupByCarWithMileage(){
+        return cars
+                .stream()
+                .collect(groupingBy(
+                        identity(),
+                        collectingAndThen(
+                                mapping(toMileage, toList()),
+                                list -> list.get(0))))
+                .entrySet()
+                .stream()
+                .sorted((e1, e2) -> compare(e2.getValue(), e1.getValue()))
+                .collect(toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
+    }
+
+    /**
      *         Method group cars by TyreType and sorted by amount of cars in List<Car>
      * @return Map with TyreType as keys and List with Cars as values. Pairs key-values are sorted by amount cars
      *          in list descending
@@ -98,14 +123,14 @@ public class CarsService {
                 .collect(groupingBy(
                         toTyreType,
                         collectingAndThen(
-                                mapping(Function.identity(), toList()),
+                                mapping(identity(), toList()),
                                 l -> l.stream()
                                         .sorted(sortByModel)
                                         .toList()
                         )))
                 .entrySet()
                 .stream()
-                .sorted((e1, e2) -> Integer.compare(e2.getValue().size(), e1.getValue().size()))
+                .sorted((e1, e2) -> compare(e2.getValue().size(), e1.getValue().size()))
                 .collect(toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,

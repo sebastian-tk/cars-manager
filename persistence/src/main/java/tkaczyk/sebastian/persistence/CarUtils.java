@@ -11,6 +11,7 @@ import java.util.function.Function;
 public interface CarUtils {
     Function<Car,String> toModel = car -> car.model;
     Function<Car, TyreType> toTyreType = car -> car.wheel.type;
+    Function<Car,Integer> toMileage = car -> car.mileage;
 
     Comparator<Car> sortBySizeWheel = Comparator.comparing(car -> car.wheel.size);
     Comparator<Car> sortByPowerEngine = Comparator.comparing(car -> car.engine.power);
