@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
+import static tkaczyk.sebastian.persistence.CarUtils.carWithCarBodyType;
 import static tkaczyk.sebastian.persistence.type.CarBodyType.*;
 import static tkaczyk.sebastian.service.extensions.CarFactory.*;
 
@@ -92,7 +93,7 @@ public class CarServiceWithCarsOfRequireCarBodyTypeInRangePriceTest {
 
         assertThat(carsService.withCarsOfRequireCarBodyTypeInRangePrice(carBodyType,minPriceTest,maxPriceTest)
                 .stream()
-                .filter(car -> car.isCarBodyTypeEqual(carBodyType))
+                .filter(car-> carWithCarBodyType.test(car,carBodyType))
                 .filter(car-> car.isPriceInRange(minPriceTest,maxPriceTest))
                 .toList())
                 .containsExactlyInAnyOrderElementsOf(expectedCars.get(carBodyType));
@@ -116,7 +117,7 @@ public class CarServiceWithCarsOfRequireCarBodyTypeInRangePriceTest {
             );
         assertThat(carsService.withCarsOfRequireCarBodyTypeInRangePrice(carBodyType,new BigDecimal(minPrice),new BigDecimal(maxPrice))
                 .stream()
-                .filter(car -> car.isCarBodyTypeEqual(carBodyType))
+                .filter(car-> carWithCarBodyType.test(car,carBodyType))
                 .filter(car-> car.isPriceInRange(new BigDecimal(minPrice),new BigDecimal(maxPrice)))
                 .toList())
                 .containsExactlyInAnyOrderElementsOf( expectedCars.get(idx));

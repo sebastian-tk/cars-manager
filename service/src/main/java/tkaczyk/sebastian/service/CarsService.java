@@ -3,7 +3,6 @@ package tkaczyk.sebastian.service;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.collections.impl.collector.Collectors2;
 import tkaczyk.sebastian.persistence.Car;
-import tkaczyk.sebastian.persistence.CarUtils;
 import tkaczyk.sebastian.persistence.type.CarBodyType;
 import tkaczyk.sebastian.persistence.type.EngineType;
 import tkaczyk.sebastian.persistence.type.TyreType;
@@ -14,8 +13,6 @@ import tkaczyk.sebastian.service.type.StatisticsType;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.*;
@@ -72,7 +69,7 @@ public class CarsService {
 
         return cars
                     .stream()
-                    .filter(car-> car.isCarBodyTypeEqual(carBodyType))
+                    .filter(car-> carWithCarBodyType.test(car,carBodyType))
                     .filter(car-> car.isPriceInRange(minPrice,maxPrice))
                     .toList();
     }

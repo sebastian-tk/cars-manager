@@ -1,6 +1,7 @@
 package tkaczyk.sebastian.persistence;
 
 
+import tkaczyk.sebastian.persistence.type.CarBodyType;
 import tkaczyk.sebastian.persistence.type.EngineType;
 import tkaczyk.sebastian.persistence.type.TyreType;
 
@@ -28,4 +29,6 @@ public interface CarUtils {
 
     BiPredicate<Car, EngineType> carWithEngineType = (car,type) -> car.engine.type.equals(type);
     BiPredicate<Car, List<String>> carWithComponents = (car, components) -> car.carBody.components.containsAll(components);
+    BiPredicate<Car, CarBodyType> carWithCarBodyType = (car, carBodyType) -> car.carBody.type.equals(carBodyType);
+
 }
